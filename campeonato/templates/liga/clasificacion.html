@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block body %}
+{% comment %} {% block js %}
+<script src="{% static 'js/comprobar.js' %}"></script>
+{% endblock js%} {% endcomment %}
+<div class="container-table100">
+        <div class="wrap-table100">
+        {% if request.user.is_staff %}
+  		    <a href="{% url 'campeonato:addEquipo' %}">  
+            <input type="submit" class="btn btn-outline-success btn-lg btn-block" value="Añadir"/>
+          </a>
+        {% endif %}
+          <div class="table100 ver1 m-b-110">
+            <div class="table100-head">
+            
+              <table>
+                <thead>
+                  <tr>
+                    <th class="cell100 column1">Escudo</th>
+                    <th class="cell100 column2">Equipo</th>
+                    <th class="cell100 column3">PTs</th>
+                    <th class="cell100 column4">J</th>
+                    <th class="cell100 column5">G</th>
+                    <th class="cell100 column6">E</th>
+                    <th class="cell100 column7">P</th>
+                    <th class="cell100 column8">GF</th>
+                    <th class="cell100 column9">GC</th>
+                    <th class="cell100 column10">Acciones</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            
+            <div class="table100-body js-pscroll">
+              <table>
+                <tbody>
+                {% for i in equipos %}
+                  <tr class="row100 body">
+                    <td class="cell100 column1"><a href="{% url 'campeonato:detail_club' i.id %}"><img src="{{i.foto.url}}" style="width:70px;heigth:70px"/> </a></td>
+                    <td class="cell100 column2">{{i.nombre}}</td>
+                    <td class="cell100 column3">{{i.puntos}}</td>
+                    <td class="cell100 column4">{{i.jugados}}</td>
+                    <td class="cell100 column5">{{i.ganados}}</td>
+                    <td class="cell100 column6">{{i.empatados}}</td>
+                    <td class="cell100 column7">{{i.perdidos}}</td>
+                    <td class="cell100 column8">{{i.goles_a_favor}}</td>
+                    <td class="cell100 column9">{{i.goles_en_contra}}</td>
+                    {% if request.user.is_staff %}
+                    <td class="cell100 column10">
+                      <a class="btn btn-default btn-outline-dark" href="{% url 'campeonato:editEquipo' i.id %}"> Editar</a>
+						          <a class="btn btn-default btn-outline-danger" href="{% url 'campeonato:deleteEquipo' i.id %}">Eliminar</a>
+                    </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock body %}

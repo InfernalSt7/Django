@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Specer Template">
+    <meta name="keywords" content="Specer, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}  {% endblock title %}</title>
+
+    <!-- Google Font -->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/utiltabla.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/maintabla.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstraptabla/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animatetabla/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbartabla/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cards.css' %}">
+</head>
+{% endblock head %}
+{% block body %}
+
+
+
+<div class="container">
+	<div class="wrapper">
+        <div class="card">
+            <img src="{% static 'img/champions.jpg' %}">
+            <div class="descriptions">
+                <h1>Resultados</h1>
+                <p>
+                ¡Accede a los últimos resultados de la champions!
+                </p>
+                <form action="{% url 'campeonato:resultados_champions' 6 %}">
+                <button>
+                    Ver resultados 
+                </button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'img/clasificacion_champions.jpg' %}">
+            <div class="descriptions">
+                <h1>Clasificación</h1>
+                <p>
+                ¡Encuentra aquí al próximo ganador de la Champions League!
+                </p>
+                <button>
+                    Ver clasificación
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

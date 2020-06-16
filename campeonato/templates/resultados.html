@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block body %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bs-text">
+                        <h2>Resultados</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Results Section Begin -->
+    <section class="schedule-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 left-blog-pad">
+                    <div class="schedule-text">
+                        <div class="st-table">
+                        {% block papaya %}
+                        {% for i in object_list %}
+                            {% for j in i.id_partido.all %}
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="left-team">
+                                            <img src="{{j.equipo_local.foto.url}}" alt="">
+                                            <h4>{{j.equipo_local}}</h4>
+                                        </td>
+                                        <td class="st-option">
+                                            <div class="so-text">{{j.id_liga.nombre}}</div>
+                                            <h4>{{i.resultado}}</h4>
+                                            <div class="so-text">{{j.fecha}}</div>
+                                        </td>
+                                        <td class="right-team">
+                                            <img src="{{j.equipo_visitante.foto.url}}" alt=""> 
+                                            <h4>{{j.equipo_visitante}}</h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {%endfor%}
+                        {%endfor%}
+                        <ul class="pagination">
+                          {% if page_obj.has_previous %}
+                        <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link fuente"> <- </a></li>
+                          {% endif %}
+                        <div class="hint-text"> <span class="fuente">Mostrando <b class="fuente">{{ page_obj.number }}</b> de {{ page_obj.paginator.num_pages }} resultados</span></div>
+                          {% if page_obj.has_next %}
+                        <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link fuente">-></a></li>
+                          {% endif %}
+                        </ul>
+                        {% endblock papaya %}
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock body %}

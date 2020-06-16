@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from campeonato.views import Login, logoutUsuario
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('campeonato/',include(('campeonato.urls')))
-]
+    path('campeonato/',include(('campeonato.urls','campeonato'))),
+    path('login/', Login.as_view(), name='login'),
+    path('logout/', login_required(logoutUsuario), name='logout')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

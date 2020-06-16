@@ -1,0 +1,97 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block body %}
+
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bs-text">
+                        <h2>Club</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Club Section Begin -->
+    <section class="club-section spad">
+        <div class="container">
+            <div class="club-content">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="cc-pic">
+                            <img src="{{club.foto.url}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cc-text">
+                            <div class="ct-title">
+                                <h3>{{ club.nombre}}</h3>
+                            </div>
+                            <div class="ct-widget">
+                                <ul>
+                                    <li>
+                                        <h5>Estadio</h5>
+                                        <p>{{club.estadio}}</p>
+                                    </li>
+                                    <li>
+                                        <h5>Titulos</h5>
+                                        <p>{{club.titulos}}</p>
+                                    </li>
+                                    <li>
+                                        <h5>Presidente</h5>
+                                        <p>{{club.presidente}}</p>
+                                    </li>
+                                    <li>
+                                        <h5>Presupuesto</h5>
+                                        <p>{{club.presupuesto}}M</p>
+                                    </li>
+                                    <li>
+                                        <h5>Entrenador</h5>
+                                        {% for entrenador in entrenadores %}<p>{{entrenador.nombre}} {{entrenador.apellidos}}</p> {% endfor %}
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="club-tab-list">
+                <div class="row">
+                    <div class="col-lg-8 m-auto">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+  		                        <a href="{% url 'campeonato:addJugador' %}"><input type="submit" class="btn btn-outline-success btn-lg btn-block" value="Añadir"/></a>
+                                <div class="club-tab-content">
+                                {% for jugador in jugadores  %}
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="{{jugador.foto.url}}" alt="fotos_jugadores" style="width:80px;height:80px">
+                                            <h5>{{ jugador.nombre }} {{jugador.apellidos}}</h5>
+                                        </div>
+                                        <div class="ci-name">{{jugador.posicion}}</div>
+                                    </div>
+                                    {% if request.user.is_staff %}
+                                    <div class="ci-name">
+		                                <a class="btn btn-default btn-outline-dark" href="#"> Editar</a>
+		                                <a class="btn btn-default btn-outline-danger" href="{% url 'campeonato:deleteJugador' jugador.id %}">Eliminar</a>
+		                            </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Club Section End -->
+
+{% endblock body %}
