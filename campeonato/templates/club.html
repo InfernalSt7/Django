@@ -2,7 +2,14 @@
 {% load static %}
 {% block title %}{% endblock title %}
 {% block body %}
-
+<script>
+function imprimir(){
+    var imprimir = confirm("¿Quieres imprimir esta página?")
+    if (imprimir) {
+        window.print()
+    }
+}
+</script>
 <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
@@ -68,6 +75,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
   		                        <a href="{% url 'campeonato:addJugador' %}"><input type="submit" class="btn btn-outline-success btn-lg btn-block" value="Añadir"/></a>
+                                <input type="submit" class="btn btn-outline-warning btn-lg btn-block" value="Imprimir" onclick="imprimir()"/>
                                 <div class="club-tab-content">
                                 {% for jugador in jugadores  %}
                                     <div class="ct-item">
@@ -79,7 +87,7 @@
                                     </div>
                                     {% if request.user.is_staff %}
                                     <div class="ci-name">
-		                                <a class="btn btn-default btn-outline-dark" href="#"> Editar</a>
+		                                <a class="btn btn-default btn-outline-dark" href="{% url 'campeonato:editJugador' jugador.id %}"> Editar</a>
 		                                <a class="btn btn-default btn-outline-danger" href="{% url 'campeonato:deleteJugador' jugador.id %}">Eliminar</a>
 		                            </div>
                                     {% endif %}

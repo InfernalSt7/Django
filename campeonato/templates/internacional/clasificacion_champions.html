@@ -19,6 +19,7 @@
                     <th class="cell100 column8">P</th>
                     <th class="cell100 column9">GF</th>
                     <th class="cell100 column10">GC</th>
+                    <th class="cell100 column10">Acciones</th>
                   </tr>
                 </thead>
               </table>
@@ -27,23 +28,29 @@
             <div class="table100-body js-pscroll">
               <table>
                 <tbody>
-                {% for i in equipos %}
+                {% for i in object_list %}
                   <tr class="row100 body">
-                    <td class="cell100 column2"><img src="{{i.foto.url}}"/></td>
-                    <td class="cell100 column3">{{i.nombre}}</td>
-                    <td class="cell100 column4">Aaron Chapman</td>
-                    <td class="cell100 column5">{{i.puntos}}</td>
-                    <td class="cell100 column6">3</td>
-                    <td class="cell100 column7">10</td>
-                    <td class="cell100 column8">10</td>
-                    <td class="cell100 column9">10</td>
-                    <td class="cell100 column10">10</td>
-                  </tr>
-                {% endfor %}  
+                    <td class="cell100 column1"><a href="{% url 'campeonato:detail_club' i.id %}"><img src="{{i.foto.url}}" style="width:70px;heigth:70px"/> </a></td>
+                    <td class="cell100 column2">{{i.nombre}}</td>
+                    <td class="cell100 column3">{{i.puntos}}</td>
+                    <td class="cell100 column4">{{i.jugados}}</td>
+                    <td class="cell100 column5">{{i.ganados}}</td>
+                    <td class="cell100 column6">{{i.empatados}}</td>
+                    <td class="cell100 column7">{{i.perdidos}}</td>
+                    <td class="cell100 column8">{{i.goles_a_favor}}</td>
+                    <td class="cell100 column9">{{i.goles_en_contra}}</td>
+                    {% if request.user.is_staff %}
+                    <td class="cell100 column10">
+                      <a class="btn btn-default btn-outline-dark" href="{% url 'campeonato:editEquipo' i.id %}"> Editar</a>
+						          <a class="btn btn-default btn-outline-danger" href="{% url 'campeonato:deleteEquipo' i.id %}">Eliminar</a>
+                    </td>
+                    {% endif %}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
+<script src="{% static 'js/bienvenida.js' %}"></script>
 {% endblock body %}

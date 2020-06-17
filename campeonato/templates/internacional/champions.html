@@ -37,27 +37,15 @@
         <div class="card">
             <img src="{% static 'img/champions.jpg' %}">
             <div class="descriptions">
-                <h1>Resultados</h1>
-                <p>
-                ¡Accede a los últimos resultados de la champions!
-                </p>
-                <form action="{% url 'campeonato:resultados_champions' 6 %}">
-                <button>
-                    Ver resultados 
-                </button>
-                </form>
-            </div>
-        </div>
-        <div class="card">
-            <img src="{% static 'img/clasificacion_champions.jpg' %}">
-            <div class="descriptions">
                 <h1>Clasificación</h1>
                 <p>
                 ¡Encuentra aquí al próximo ganador de la Champions League!
                 </p>
+                <form action="{% url 'campeonato:clasificacion_champions' %}">
                 <button>
-                    Ver clasificación
+                    Ver Clasificación 
                 </button>
+                </form>
             </div>
         </div>
     </div>

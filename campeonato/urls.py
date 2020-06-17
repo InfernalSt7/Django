@@ -3,11 +3,11 @@ from .views import *
 from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('', login_required(Lista_Index.as_view()), name = 'index'),
-    path('contacts/', contactos, name = 'contactos'),
+    path('contacts/', Contactos, name = 'contactos'),
     path('resultados/', Lista_Resultados.as_view(), name = 'resultados'),
     path('liga/<int:id>', clasificacion, name='clasificacion'),
     path('champions/', champions, name = 'champions'),
-    path('champions/resultados/<int:pk>', Champions_Results.as_view(), name='resultados_champions'),
+    path('champions/clasificacion/', Clasificacion_Champions.as_view(), name='clasificacion_champions'),
     path('club/<int:id>', club, name='detail_club'),
     path('addEquipo', AddEquipo.as_view(), name='addEquipo'),
     path('eliminarEquipo/<int:id>', eliminarEquipo, name='deleteEquipo'),

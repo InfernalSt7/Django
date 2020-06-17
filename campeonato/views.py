@@ -20,10 +20,12 @@ from .forms import *
 class Lista_Index(ListView):
     template_name = 'index.html'
     model = Juega
-    paginate_by = 4
+    paginate_by = 6
 
-def contactos(request):
-    return render(request, 'contactos.html')
+class Contactos(TemplateView):
+    template_name = 'contactos.html'
+# def contactos(request):
+#     return render(request, 'contactos.html')
 
 class Lista_Resultados(ListView):
     template_name = 'resultados.html'
@@ -33,16 +35,16 @@ class Lista_Resultados(ListView):
 def champions(request):
     return render(request, 'internacional/champions.html')
 
+class Clasificacion_Champions(ListView):
+    template_name = 'internacional/clasificacion_champions.html'
+    model = Equipo
+    paginate_by = 15
+
 def clasificacion(request, id):
     liga = get_object_or_404(Liga, id = id)
     equipos = Equipo.objects.filter(id_liga = liga).order_by('-puntos')
     context = {'equipos': equipos}
     return render(request, 'liga/clasificacion.html', context)
-
-class Champions_Results(DetailView):
-    template_name = 'internacional/resultados_champions.html'
-    model = Juega
-    paginate_by = 5
 
 def club(request, id):
     club = get_object_or_404(Equipo, id= id)

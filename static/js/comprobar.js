@@ -1,4 +1,5 @@
-// function comprobar(){
-//     confirm('¿Se ve todo correctamente?');
-//     setTimeout('comprobar()', 5000);    
-// }
+function comprobar(){
+    confirm('¡Aquí tiene los últimos resultados!');
+    setTimeout('comprobar()', 50000);    
+}
+comprobar()
