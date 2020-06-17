@@ -7,4 +7,4 @@ admin.site.register(Partidos)
 admin.site.register(Juega)
 admin.site.register(Jugador)
 admin.site.register(Liga)
-admin.site.register(Imagenes)
+

@@ -21,14 +21,6 @@ class Lista_Index(ListView):
     model = Juega
     paginate_by = 6
 
-    def get(self, request, *args, **kwargs):
-        resultados = Juega.objects.all()
-        imagenes = Imagenes.objects.all()            
-        paginator = Paginator(resultados, 4)
-        context = {'resultados': resultados, 'imagenes': imagenes}
-
-        return render(request, self.template_name, context)
-
 class Contactos(TemplateView):
     template_name = 'contactos.html'
 # def contactos(request):

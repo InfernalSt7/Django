@@ -65,16 +65,16 @@
         <ul class="main-menu mobile-menu">
             <li class="active"><a>Ligas</a>
             <ul class="dropdown arrow-top">
-                <li><a href="liga/premier_league">Premier League</a></li>
-                <li><a href="liga/liga_santander">Liga Santander</a></li>
-                <li><a href="liga/bundesliga">Bundesliga</a></li>
-                <li><a href="liga/serie_A">Serie A</a></li>
-                <li><a href="liga/ligue_1">Ligue 1</a></li>
-              </ul>
+                <li><a href="{% url 'campeonato:clasificacion' 2 %}">Premier League</a></li>
+                <li><a href="{% url 'campeonato:clasificacion' 1 %}">Liga Santander</a></li>
+                <li><a href="{% url 'campeonato:clasificacion' 3 %}">Bundesliga</a></li>
+                <li><a href="{% url 'campeonato:clasificacion' 4 %}">Serie A</a></li>
+                <li><a href="{% url 'campeonato:clasificacion' 5 %}">Ligue 1</a></li>
+            </ul>
             </li>
-            <li><a href="resultados/">Resultados</a></li>
-            <li><a href="matches.html">Internacional</a></li>
-            <li><a href="contacts/">Contáctanos</a></li>
+            <li><a href="/campeonato/resultados/">Resultados</a></li>
+            <li><a href="/campeonato/champions/">Internacional</a></li>
+            <li><a href="{% url 'campeonato:contactos' %}">Contáctanos</a></li>
         </ul>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -129,7 +129,7 @@
                                   </li>
                                   <li><a href="/campeonato/resultados/">Resultados</a></li>
                                   <li><a href="/campeonato/champions/">Internacional</a></li>
-                                  <li><a href="/campeonato/contacts/">Contáctanos</a></li>
+                                  <li><a href="{% url 'campeonato:contactos' %}">Contáctanos</a></li>
                             </ul>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
         <div class="container">
             <div class="tn-title"></i>Resultados</div>
             <div class="news-slider owl-carousel">
-              {% for p in resultados %}
+              {% for p in object_list %}
                 {% for m in p.id_partido.all %}
                 <div class="nt-item">{{m.equipo_local}} {{p.resultado}} {{m.equipo_visitante}} </div> 
                 {% endfor %}
@@ -190,7 +190,7 @@
                     <div class="ms-content">
                         <h4>Últimos Resultados</h4>
                         <div class="mc-table">
-                          {% for i in resultados %}
+                          {% for i in object_list %}
                             {% for j in i.id_partido.all %}
                           <table>
                               <tbody>
@@ -237,18 +237,42 @@
                 </div>
             </div>
             <div class="row">
-                
                 <div class="video-slider owl-carousel">
-                    <div class="col-lg-3">
-                    {% for imagen in imagenes %}
-                        <div class="video-item set-bg">
-                            <img src="{{imagen.foto.url}}"/>
+                <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'img/cabezazomegaton.jpg' %}">
+                            <div class="vi-title">
+                            </div>
                         </div>
-                        {% endfor %}
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'img/golf.jpg' %}">
+                            <div class="vi-title">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'img/sr4.jpg' %}">
+                            <div class="vi-title">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'img/pierluigi.jpg' %}">
+                            <div class="vi-title">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="video-item set-bg" data-setbg="{% static 'img/robertocarlos.jpg' %}">
+                            <div class="vi-title">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                
             </div>
         </div>
     </section>
