@@ -1,5 +1,5 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
-from campeonato.models import Juega, Equipo
+from campeonato.models import *
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -15,12 +15,19 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout
 from .forms import *
-
-
+   
 class Lista_Index(ListView):
     template_name = 'index.html'
     model = Juega
     paginate_by = 6
+
+    def get(self, request, *args, **kwargs):
+        resultados = Juega.objects.all()
+        imagenes = Imagenes.objects.all()            
+        paginator = Paginator(resultados, 4)
+        context = {'resultados': resultados, 'imagenes': imagenes}
+
+        return render(request, self.template_name, context)
 
 class Contactos(TemplateView):
     template_name = 'contactos.html'
@@ -38,7 +45,11 @@ def champions(request):
 class Clasificacion_Champions(ListView):
     template_name = 'internacional/clasificacion_champions.html'
     model = Equipo
-    paginate_by = 15
+    paginate_by = 20
+    # def get(self, request, *args, **kwargs):
+    #     equipos = Equipo.objects.order_by('-puntos')
+    #     context = {'equipos': equipos}
+    #     return render(request, self.template_name, context)
 
 def clasificacion(request, id):
     liga = get_object_or_404(Liga, id = id)

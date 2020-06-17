@@ -32,7 +32,7 @@ class Equipo(models.Model):
     class Meta:
         verbose_name="equipo"
         verbose_name_plural="equipos"
-
+        ordering = ['-puntos']
     def __str__(self):
         return self.nombre
 
@@ -91,3 +91,10 @@ class Jugador(models.Model):
     def __str__(self):
         return self.nombre
    
+
+class Imagenes(models.Model):
+    foto = models.ImageField(blank = True, upload_to = "media")
+
+    class Meta:
+        verbose_name="imagen"
+        verbose_name_plural="imagenes"
